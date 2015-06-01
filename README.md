@@ -5,6 +5,8 @@ This tool downloads, builds and installs a particular version of python in the l
 
 It is very useful for staging tests.
 
+I have tested it on CentOS 6.6 linux and Mac OS X 10.10.3.
+
 ### Example
 Here is an example that shows how to install 2.7.10 and 3.4.3 in a local directory tree.
 
