@@ -6,17 +6,17 @@
 
 # LICENSE (MIT)
 # Copyright (c) 2015 Joe Linoff
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -109,7 +109,7 @@ USAGE
 DESCRIPTION
         This tool downloads, builds and installs a particular version
         of python in the location of your choice without requiring
-        root permissions.
+        root permissions or a package manager like apt or yum.
 
         It also creates a virtual environment that you can activate
         to use it.
@@ -144,9 +144,12 @@ DESCRIPTION
         local module configuration.
 
            \$ /opt/python/2.7.10/venv/python2710/bin/activate
-           
+
         To remove the installation, simply remove the bld, release and
         venv directories.
+
+        Make sure that you have openssl installed so that pip will
+        build correctly.
 
 OPTIONS
         -b <dir>, --build-dir <dir>
@@ -196,7 +199,7 @@ EXAMPLES
         \$ rm -rf /opt/python/$Version /opt/build/python/$Version
 
 VERSION
-        1.0
+        1.0.1
 EOF
 }
 
@@ -206,7 +209,7 @@ EOF
 MeDir=$(dirname -- $(abspath $0))
 BldDir="$MeDir/build"
 RtfDir="$MeDir/rtf"
-Version="2.7.10"
+Version="2.7.13"
 DefVenvDirName=$(echo "python$Version" | tr -d '.-')
 DefVenvDir="$RtfDir/venv/$DefVenvDirName"
 VenvDir=''
@@ -291,7 +294,7 @@ cd $BldDir
 
 if [ ! -f $Archive ] ; then
     echo "INFO: Downloading python archive: $Archive."
-    runcmd wget https://www.python.org/ftp/python/$Version/$Archive -O $Archive
+    runcmd curl -k -L -O https://www.python.org/ftp/python/$Version/$Archive
 else
     echo "INFO: Downloaded python archive: $Archive."
 fi
