@@ -15,7 +15,7 @@ $ # Create the top level work directory.
 $ mkdir ~/work/python
 
 $ # Downlod pybld.sh, make sure that it is executable.
-$ wget http://projects.joelinoff.com/pybld/pybld.sh
+$ curl -k -L -O http://projects.joelinoff.com/pybld/pybld.sh
 $ sum pybld.sh
 08374    12
 $ chmod a+x pybld.sh
